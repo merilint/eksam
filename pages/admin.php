@@ -33,18 +33,45 @@ if (isset($username, $password)) {
         </form>
     </div>
 <?php else: ?>
+<div class="row">
+        <h2>Võistlejad</h2>
 
-    <div class="row">
-        <a class="btn btn-lg" href="index.php?page=admin&action=confirm">Test</a>
+        <table class="table table-hover table-striped">
+
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nimi</th>
+                <th>Number</th>
+                <th>Kinnitatud</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach (getContestants() as $row) {
+                ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['code'] ?></td>
+                    <td><?= $row['is_confirmed'] ?></td>
+                    <td><a href="index.php?page=admin&action=delete&id=<?= $row['id'] ?>">kustuta</a></td>
+                </tr>
+            <?php
+            }
+            ?>
+            </tbody>
+        </table>
     </div>
-	  <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Läbitud kontrollpunktid</h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group">
-					
-                            
+
+<?php
+
+if (isset($action, $id)) {
+    handleDelete($action, $id);
+}
+
+?>
+    
 <?php endif; ?>
 <?php getFooter() ?>

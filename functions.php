@@ -93,3 +93,19 @@ function registerCheckpoint($code, $x, $y) {
 
     return true;
 }
+function handleDelete($action, $id){
+
+	global $pdo;
+    //kustuta
+    $stmt = $pdo->prepare('DELETE FROM contestant WHERE id = :id');
+    $stmt->execute([':id' => $id]);
+    //suuna
+    header('Location: index.php?action=admin');
+
+}
+function getContestants(){
+	global $pdo;
+	$stmt = $pdo->prepare('SELECT * FROM contestant');
+	$stmt->execute();
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
