@@ -1,0 +1,106 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `orienteerumine`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `administrator`
+--
+
+CREATE TABLE IF NOT EXISTS `administrator` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `administrator`
+--
+
+INSERT INTO `administrator` (`id`, `name`, `username`, `password`) VALUES
+(1, 'Admin', 'admin', 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkpoint`
+--
+
+CREATE TABLE IF NOT EXISTS `checkpoint` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `checkpoint`
+--
+
+INSERT INTO `checkpoint` (`id`, `name`, `x`, `y`) VALUES
+(1, 'Estonia teater', 12, 33),
+(2, 'solaris', 13, 33),
+(3, 'Nullpunkt', 0, 0),
+(4, 'Keskpaik', 15, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkpoint_registration`
+--
+
+CREATE TABLE IF NOT EXISTS `checkpoint_registration` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` int(20) NOT NULL,
+  `contestant_id` int(11) NOT NULL,
+  `checkpoint_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `checkpoint_registration`
+--
+
+INSERT INTO `checkpoint_registration` (`id`, `timestamp`, `contestant_id`, `checkpoint_id`) VALUES
+(6, 1452600519, 4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contestant`
+--
+
+CREATE TABLE IF NOT EXISTS `contestant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
+  `code` int(11) NOT NULL,
+  `is_confirmed` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `contestant`
+--
+
+INSERT INTO `contestant` (`id`, `name`, `code`, `is_confirmed`) VALUES
+(1, 'Mari murakas', 33095, 0),
+(2, 'Juuli maali', 81261, 0),
+(3, 'Kollane elevant', 20868, 0),
+(4, 'test', 46240, 0);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
